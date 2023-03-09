@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+ <!--<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">-->
+  <title>Lotofácil</title>
+  <style>
+   *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   }
+   nav{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    background: black;
+   
+   }
+
+   ul{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    
+   }
+
+   a{
+    text-decoration: none;
+    color: aliceblue;
+    
+   }
+
+   li{
+    list-style-type: none;
+   }
+
+   li a {
+    padding: 20px;
+   }
+    #container{
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: 400px;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      border: 1px solid black;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      cursor: pointer;
+    }
+    td.selected {
+      background-color: #ffcc00;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#">Repositorios</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">Discord</a></li>
+      <li><a href="#">Linktree</a></li>
+    </ul>
+   
+  </nav>
+  <div id="container">
+    <table>
+      <tr>
+        <td>01</td>
+        <td>02</td>
+        <td>03</td>
+        <td>04</td>
+        <td>05</td>
+      </tr>
+      <tr>
+        <td>06</td>
+        <td>07</td>
+        <td>08</td>
+        <td>09</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        <td>14</td>
+        <td>15</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+        <td>19</td>
+        <td>20</td>
+      </tr>
+      <tr>
+        <td>21</td>
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
+        <td>25</td>
+      </tr>
+    </table>
+    <button id="sortear">Sortear</button>    
+  </div>
+  
+  <script>
+    const numerosDisponiveis = Array.from(Array(25), (_, i) => i + 1);
+    const numerosSelecionados = [];
+    
+    const cells = document.querySelectorAll('td');
+    cells.forEach(cell => {
+      cell.addEventListener('click', function() {
+        if (cell.classList.contains('selected')) {
+          cell.classList.remove('selected');
+          const index = numerosSelecionados.indexOf(parseInt(cell.textContent));
+          if (index > -1) {
+            numerosSelecionados.splice(index, 1);
+          }
+        } else {
+          cell.classList.add('selected');
+          numerosSelecionados.push(parseInt(cell.textContent));
+        }
+      });
+    });
+    const sortearButton = document.querySelector('#sortear');
+    sortearButton.addEventListener('click', function() {
+      const numerosNaoSelecionados = numerosDisponiveis.filter(numero => !numerosSelecionados.includes(numero));
+      const numerosSorteados = [];
+      
+      for (let i = 0; i < 15; i++) {
+        const index = Math.floor(Math.random() * numerosNaoSelecionados.length);
+        const numeroSorteado = numerosNaoSelecionados.splice(index, 1)[0];
+        numerosSorteados.push(numeroSorteado);
+      }
+      alert('Números sorteados: ' + numerosSorteados.join(', '));
+    });
+  </script></body>
+  </html>
